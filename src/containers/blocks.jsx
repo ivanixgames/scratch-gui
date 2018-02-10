@@ -96,6 +96,7 @@ class Blocks extends React.Component {
 
         if (prevProps.toolboxXML !== this.props.toolboxXML) {
             const selectedCategoryName = this.workspace.toolbox_.getSelectedItem().name_;
+            
             this.workspace.updateToolbox(this.props.toolboxXML);
             this.workspace.toolbox_.setSelectedCategoryByName(selectedCategoryName);
         }
@@ -251,15 +252,11 @@ class Blocks extends React.Component {
         this.setState({prompt: null});
     }
     handleCustomProceduresClose (data) {
-
         this.props.onRequestCloseCustomProcedures(data);
         const ws = this.workspace;
         ws.refreshToolboxSelection_();
-        const tb = ws.toolbox_;
-        const cat = tb.categoryMenu_.categories_;
-        const idx = cat.length - 1;
-        const name = cat[idx].name_;
-        ws.toolbox_.scrollToCategoryByName(name); // 'My Blocks'
+        // @todo ensure this does not break on localization
+        ws.toolbox_.scrollToCategoryByName('My Blocks');
     }
     render () {
         /* eslint-disable no-unused-vars */
